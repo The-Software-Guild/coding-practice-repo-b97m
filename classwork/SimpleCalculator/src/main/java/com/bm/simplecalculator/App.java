@@ -18,7 +18,8 @@ import java.util.Scanner;
 
 
 public class App {
-    public static final Scanner READER = new Scanner(System.in);
+    public static final UserIO USER_IO = new BasicIO(new Scanner(System.in));
+    
     public static enum OpChoice {
         OP_ADD,
         OP_SUB,
@@ -32,6 +33,7 @@ public class App {
         double[] currOperands = {0, 0};
         char opChar = '.';
         double result = 0;
+        
         do {
             currChoice = getNextOpChoice();
             switch (currChoice) {
@@ -74,53 +76,25 @@ public class App {
     }
     
     public static OpChoice getNextOpChoice() {
-        boolean isValid = false;
-        int userChoice = 0;
+        StringBuilder promptBuilder = new StringBuilder();
+        promptBuilder.append("-- Choose an operation below --\n");
+        promptBuilder.append("0 -- addition\n");
+        promptBuilder.append("1 -- subtraction\n");
+        promptBuilder.append("2 -- multiplication\n");
+        promptBuilder.append("3 -- division\n");
+        promptBuilder.append("4 -- exit program");
         
-        while (!isValid) {
-            System.out.println("-- Choose an operation below --");
-            System.out.println("0 -- addition");
-            System.out.println("1 -- subtraction");
-            System.out.println("2 -- multiplication");
-            System.out.println("3 -- division");
-            System.out.println("4 -- exit program");
-            try {
-                userChoice = Integer.parseInt(READER.nextLine());
-                if (userChoice < 0 || userChoice > 4) {
-                    System.out.println("!! Please enter an int in the range [0, 3] !!");
-                } else {
-                    isValid = true;
-                }
-            } catch (Exception ex) {
-                System.out.println("!! That input could not be converted to an int !!");
-            }
-        }
-        return OpChoice.values()[userChoice];
+        return OpChoice.values()[USER_IO.readInt(promptBuilder.toString(), 0, 4)];
     }
     
     public static double[] getOperands() {
         double[] retr = new double[2];
         
         System.out.println("-- Left Operand --");
-        retr[0] = getNextDouble();
+        retr[0] = USER_IO.readDouble("Enter a number");
         System.out.println("-- Right Operand --");
-        retr[1] = getNextDouble();
+        retr[1] = USER_IO.readDouble("Enter a number");
         
-        return retr;
-    }
-    
-    public static double getNextDouble() {
-        boolean isValid = false;
-        double retr = 0;
-        while (!isValid) {
-            try {
-                System.out.println("Enter a number");
-                retr = Double.parseDouble(READER.nextLine());
-                isValid = true;
-            } catch (Exception ex) {
-                System.out.println("!! That input could not be converted to a number !!");
-            }
-        }
         return retr;
     }
 }
