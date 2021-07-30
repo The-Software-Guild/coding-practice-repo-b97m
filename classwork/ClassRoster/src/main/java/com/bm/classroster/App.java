@@ -9,8 +9,12 @@
 package com.bm.classroster;
 
 import com.bm.classroster.controller.ClassRosterController;
+import com.bm.classroster.dao.ClassRosterAuditDao;
+import com.bm.classroster.dao.ClassRosterAuditDaoFileImpl;
 import com.bm.classroster.dao.ClassRosterDao;
 import com.bm.classroster.dao.ClassRosterDaoFileImpl;
+import com.bm.classroster.service.ClassRosterServiceLayer;
+import com.bm.classroster.service.ClassRosterServiceLayerImpl;
 import com.bm.classroster.ui.ClassRosterView;
 import com.bm.classroster.ui.UserIO;
 import com.bm.classroster.ui.UserIOConsoleImpl;
@@ -21,9 +25,16 @@ public class App {
     public static void main(String[] args) {
         UserIO myIo = new UserIOConsoleImpl(new Scanner(System.in));
         ClassRosterView myView = new ClassRosterView(myIo);
+        
         ClassRosterDao myDao = new ClassRosterDaoFileImpl();
-        ClassRosterController controller = new ClassRosterController(
+        ClassRosterAuditDao myAuditDao = new ClassRosterAuditDaoFileImpl();
+        ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(
             myDao, 
+            myAuditDao
+        );
+        
+        ClassRosterController controller = new ClassRosterController(
+            myService, 
             myView
         );
         controller.run();

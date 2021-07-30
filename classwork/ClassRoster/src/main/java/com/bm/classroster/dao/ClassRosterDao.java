@@ -27,33 +27,33 @@ public interface ClassRosterDao {
      * @param studentId
      * @param student
      * @return The Student associated with the student id if it exists, null otherwise
-     * @throws com.bm.classroster.dao.ClassRosterDaoException
+     * @throws com.bm.classroster.dao.ClassRosterPersistenceException
      */
-    Student addStudent(String studentId, Student student) throws ClassRosterDaoException;
+    Student addStudent(String studentId, Student student) throws ClassRosterPersistenceException;
     
     /**
      * Returns a List of all students in the roster.
      * 
      * @return List containing all students in the roster
-     * @throws com.bm.classroster.dao.ClassRosterDaoException
+     * @throws com.bm.classroster.dao.ClassRosterPersistenceException
      */
-    List<Student> getAllStudents() throws ClassRosterDaoException;
+    List<Student> getAllStudents() throws ClassRosterPersistenceException;
     
     /**
      * Returns the student object associated with a given student id.Returns null if such a student does not exist
      * 
      * @param studentId
      * @return The student associated with the given student id, or null otherwise
-     * @throws com.bm.classroster.dao.ClassRosterDaoException
+     * @throws com.bm.classroster.dao.ClassRosterPersistenceException
      */
-    Student getStudent(String studentId) throws ClassRosterDaoException;
+    Student getStudent(String studentId) throws ClassRosterPersistenceException;
     
     /**
      * Removes from the roster the student associated with the given id.If such a student exists, it is also returned.
      * Otherwise, null is returned
      * @param studentId
      * @return The student that was removed and associated with the given id. Otherwise, null
-     * @throws com.bm.classroster.dao.ClassRosterDaoException
+     * @throws com.bm.classroster.dao.ClassRosterPersistenceException
      */
-    Student removeStudent(String studentId) throws ClassRosterDaoException;
+    Student removeStudent(String studentId) throws ClassRosterPersistenceException;
 }
