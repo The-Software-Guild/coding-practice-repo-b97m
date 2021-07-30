@@ -8,6 +8,8 @@
 
 package com.bm.classroster.dto;
 
+import java.util.Objects;
+
 
 public class Student {
     private String firstName;
@@ -46,5 +48,46 @@ public class Student {
 
     public void setCohort(String cohort) {
         this.cohort = cohort;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.firstName);
+        hash = 79 * hash + Objects.hashCode(this.lastName);
+        hash = 79 * hash + Objects.hashCode(this.studentId);
+        hash = 79 * hash + Objects.hashCode(this.cohort);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.studentId, other.studentId)) {
+            return false;
+        }
+        return Objects.equals(this.cohort, other.cohort);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "firstName=" + firstName + ", lastName=" 
+            + lastName + ", studentId=" + studentId + ", cohort=" + cohort 
+            + '}';
     }
 }
