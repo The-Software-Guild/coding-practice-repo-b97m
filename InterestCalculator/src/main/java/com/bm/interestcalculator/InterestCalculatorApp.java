@@ -8,6 +8,7 @@
 
 package com.bm.interestcalculator;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 
@@ -16,61 +17,66 @@ public class InterestCalculatorApp {
     public static void main(String[] args) {
         Scanner uInput = new Scanner(System.in);
         System.out.println("-- How much do you want to invest --");
-        double principle = queryDouble(uInput);
+        BigDecimal principle = queryBigDecimal(uInput);
         
         System.out.println("-- How many years are you investing --");
-        int investingYears = queryPostiveInt(uInput);
+        BigDecimal investingYears = queryBigDecimalPositiveIntegral(uInput);
         
         System.out.println(
             "-- What is the percent annual interest "
             + "rate growth (compounded quarterly)? --"
         );
-        double quarterlyRate = queryDouble(uInput) / 400.0;
-        double increment;
+        BigDecimal quarterlyRate = queryBigDecimal(uInput).divide(BigDecimal.valueOf(400L));
+        BigDecimal totalIncrement;
         
         System.out.println();
         System.out.println("|| Processing... ||");
-        for (int i = 1; i <= investingYears; i++) { 
-            System.out.format("Year %d: %n", i);
-            System.out.format("Began with $%.3f%n", principle);
+        for (BigDecimal i = BigDecimal.ONE; i.compareTo(investingYears) <= 0; i = i.add(BigDecimal.ONE)) { 
+            System.out.format("Year %s: %n", i);
+            System.out.format("Began with $%s%n", principle);
             
-            increment = 0;
+            totalIncrement = BigDecimal.ZERO;
             for (int j = 0; j < 4; j++) {
-                increment += principle * quarterlyRate;
-                principle += principle * quarterlyRate;
+                BigDecimal increment = principle.multiply(quarterlyRate);
+                totalIncrement = totalIncrement.add(increment);
+                principle = principle.add(increment);
             }
-            System.out.format("Earned $%.3f%n", increment);
-            System.out.format("Ended with $%.3f%n", principle);
+            System.out.format("Earned $%s%n", totalIncrement);
+            System.out.format("Ended with $%s%n", principle);
             System.out.println();
         }
     }
     
-    public static int queryPostiveInt(Scanner uInput) {
+    public static BigDecimal queryBigDecimalPositiveIntegral(Scanner uInput) {
         boolean invalid = true;
-        int retr = - 1;
+        BigDecimal retr = BigDecimal.ZERO;
         while (invalid) {
             try {
-                retr = Integer.parseInt(uInput.nextLine());
-                invalid = !(retr > 0);
+                retr = new BigDecimal(uInput.nextLine());
+                invalid = (retr.signum() > 0) && 
+                          (retr.equals(retr.divideToIntegralValue(BigDecimal.ONE)));
+                invalid = !invalid;
+                
                 if (invalid) {
-                    System.out.println("!! The input must be a postive integer !!");
-                    System.out.println("-- Please provide a postive integer --");
+                    System.out.println("!! The input was not a positive integer !!");
+                    System.out.println("-- Please enter a positive integer --");
                 }
             } catch (NumberFormatException ex) {
                 System.out.println("!! The input could not be converted !!");
                 System.out.println("!! to an integer                    !!");
-                System.out.println("-- Please enter an integer --");
+                System.out.println("-- Please enter an integer number --");
             }
         }
+        
         return retr;
     }
     
-    public static double queryDouble(Scanner uInput) {
+    public static BigDecimal queryBigDecimal(Scanner uInput) {
         boolean invalid = true;
-        double retr = -1;
+        BigDecimal retr = BigDecimal.ZERO;
         while (invalid) {
             try {
-                retr = Double.parseDouble(uInput.nextLine());
+                retr = new BigDecimal(uInput.nextLine());
                 invalid = false;
             } catch (NumberFormatException ex) {
                 System.out.println("!! The input could not be converted !!");
