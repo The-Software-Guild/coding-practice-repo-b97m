@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.sg.testing.dao.implementations.MonsterDaoTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.047 sec <<< FAILURE! - in com.sg.testing.dao.implementations.MonsterDaoTest
+testAddThenGetAll  Time elapsed: 0.025 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: There should be two monsters ==> expected: <2> but was: <4>
+	at com.sg.testing.dao.implementations.MonsterDaoTest.testAddThenGetAll(MonsterDaoTest.java:117)
+
+testAddThenGetTwiceOnSameMonster  Time elapsed: 0.016 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Dracula should still be retrievable from the DAO after geing retrieved ==> expected: <Monster{name=Dracula, type=VAMPIRE, peopleEaten=0, favoriteFood=Hemoglobin}> but was: <null>
+	at com.sg.testing.dao.implementations.MonsterDaoTest.testAddThenGetTwiceOnSameMonster(MonsterDaoTest.java:150)
+
