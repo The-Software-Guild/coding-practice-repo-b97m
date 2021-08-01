@@ -24,24 +24,56 @@ public class VendingMachineView {
         userIo.displayLine(line);
     }
     
+    public void displayInformationalLine(String line) {
+        userIo.displayInformationalLine(line);
+    }
+    
     public void displayErrorLine(String line) {
         userIo.displayErrorLine(line);
     }
     
-    public void displayMainMenuOptions(String[] options) {
+    public void displayMainMenuOptions(String... options) {
         userIo.displayAroundContents("MAIN MENU OPTIONS", options);
     }
     
+    public void displayCoinDepositOptions(String... options) {
+        userIo.displayAroundContents("COIN DEPOSIT OPTIONS", options);
+    }
+    
     public void displayVendingItems(List<VendingMachineItem> items) {
+        this.userIo.displayInformationalLine("Featured Vending Items");
         items.forEach(item -> {
             this.userIo.displayAroundContents(
                 item.getName(),
                 new String[] {
                     "Cost: $" + item.getCost(),
-                    "Quantity available: " + item.getQuantity()
+                    "Quantity: " + item.getQuantity()
                 }
             );
         });
+    }
+    
+    public void displayChange(BigDecimal change) {
+        BigInteger cents = change.multiply(new BigDecimal("100")).toBigInteger();
+        
+        BigInteger quarters = cents.divide(new BigInteger("25"));
+        cents = cents.remainder(new BigInteger("25"));
+        
+        BigInteger dimes = cents.divide(new BigInteger("10"));
+        cents = cents.remainder(new BigInteger("10"));
+        
+        BigInteger nickels = cents.divide(new BigInteger("5"));
+        cents = cents.remainder(new BigInteger("5"));
+        
+        userIo.displayAroundContents(
+            "Change provided",
+            new String[] {
+                "Quarters: " + quarters.toString(),
+                "Dimes: " + dimes.toString(),
+                "Nickels: " + nickels.toString(),
+                "Pennies: " + cents.toString()
+            }
+        );
     }
     
     public Supplier<Integer> intSupplier(
@@ -60,20 +92,20 @@ public class VendingMachineView {
         return userIo.stringSupplier(prompt, test, errorText);
     }
     
-    public Supplier<BigInteger> BigIntegerSupplier(
+    public Supplier<BigInteger> bigIntegerSupplier(
         String prompt, 
         Predicate<BigInteger> test, 
         String errorText) {
         
-        return userIo.BigIntegerSupplier(prompt, test, errorText);
+        return userIo.bigIntegerSupplier(prompt, test, errorText);
     }
     
-    public Supplier<BigDecimal> BigDecimalSupplier(
+    public Supplier<BigDecimal> bigDecimalSupplier(
         String prompt, 
         Predicate<BigDecimal> test, 
         String errorText) {
         
-        return userIo.BigDecimalSupplier(prompt, test, errorText);
+        return userIo.bigDecimalSupplier(prompt, test, errorText);
     }
 
     public void close() {

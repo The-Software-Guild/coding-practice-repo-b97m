@@ -89,7 +89,7 @@ public class UserIoConsoleImpl implements UserIo {
     }
 
     @Override
-    public Supplier<BigInteger> BigIntegerSupplier(String prompt, Predicate<BigInteger> test, String errorText) {
+    public Supplier<BigInteger> bigIntegerSupplier(String prompt, Predicate<BigInteger> test, String errorText) {
         return () -> {
             boolean invalid = true;
             BigInteger receivedBigInt = BigInteger.ZERO;
@@ -110,7 +110,7 @@ public class UserIoConsoleImpl implements UserIo {
     }
 
     @Override
-    public Supplier<BigDecimal> BigDecimalSupplier(String prompt, Predicate<BigDecimal> test, String errorText) {
+    public Supplier<BigDecimal> bigDecimalSupplier(String prompt, Predicate<BigDecimal> test, String errorText) {
         return () -> {
             boolean invalid = true;
             BigDecimal receivedBigDec = BigDecimal.ZERO;

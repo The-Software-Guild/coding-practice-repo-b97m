@@ -50,6 +50,12 @@ public class VendingMachineService {
         return fundsAvailable;
     }
     
+    public void addCoins(Coin coin, BigInteger quantity) {
+        fundsAvailable = fundsAvailable.add(
+            coin.getValue().multiply(new BigDecimal(quantity.toString()))
+        );
+    }
+    
     public void transactItem(String itemName) throws
         NoItemInventoryException,
         InsufficientFundsException {
@@ -69,8 +75,10 @@ public class VendingMachineService {
         if (fundsAvailable.compareTo(item.getCost()) < 0) {
             auditDao.appendRecord("Transaction failed - not enough funds for item");
             throw new InsufficientFundsException(
-                "Not enough funds have been provided to purchase this item"
-            ); 
+                "Not enough funds have been provided to purchase this item "
+                + "(Item cost: $" + item.getCost().toString() 
+                + ", Funds available: $" + fundsAvailable.toString() + ")"
+            );
         }
         
         if (dao.removeOneOfItem(item.getName()).isEmpty()) {
@@ -81,5 +89,9 @@ public class VendingMachineService {
         }
         fundsAvailable = fundsAvailable.subtract(item.getCost());
         auditDao.appendRecord("Transaction successful");
+    }
+    
+    public void close() {
+        auditDao.close();
     }
 }

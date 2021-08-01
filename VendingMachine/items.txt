@@ -1,1 +1,2 @@
-Flamin' Hot Cheetos::1.99::20
+Coca Cola::2.99::9
+Flamin' Hot Cheetos::1.99::3

@@ -31,13 +31,13 @@ public interface UserIo {
         String errorText
     );
     
-    public Supplier<BigInteger> BigIntegerSupplier(
+    public Supplier<BigInteger> bigIntegerSupplier(
         String prompt, 
         Predicate<BigInteger> test, 
         String errorText
     );
     
-    public Supplier<BigDecimal> BigDecimalSupplier(
+    public Supplier<BigDecimal> bigDecimalSupplier(
         String prompt, 
         Predicate<BigDecimal> test, 
         String errorText

@@ -3,6 +3,7 @@ package com.bm.vendingmachine.dao;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 
 /**
  * @author Benjamin Munoz
@@ -25,7 +26,8 @@ public class VendingMachineAuditDaoConsoleImpl implements VendingMachineAuditDao
     @Override
     public void appendRecord(String s) {
         if (writer != null) {
-          writer.println(s);            
+          writer.println(LocalDateTime.now().toString() + ": " + s);
+          writer.flush();
         }
     }
     
