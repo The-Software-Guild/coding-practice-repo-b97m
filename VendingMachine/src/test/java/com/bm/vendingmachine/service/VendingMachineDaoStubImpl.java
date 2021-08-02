@@ -19,6 +19,9 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
+ * A Stub Vending Machine DAO implementation for 
+ * testing the Service Layer
+ * 
  * @author Benjamin Munoz
  * email: driver396@gmail.com
  * date: Aug 1, 2021

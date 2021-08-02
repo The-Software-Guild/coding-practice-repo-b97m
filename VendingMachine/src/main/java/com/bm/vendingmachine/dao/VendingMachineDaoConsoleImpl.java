@@ -40,7 +40,6 @@ public class VendingMachineDaoConsoleImpl implements VendingMachineDao {
         ITEMS_FILE = itemsFile;
     }
     
-    
     @Override
     public void loadItems() throws FailedLoadOfVendingItemsException {
         Scanner reader;
@@ -81,7 +80,7 @@ public class VendingMachineDaoConsoleImpl implements VendingMachineDao {
     @Override
     public Optional<VendingMachineItem> removeOneOfItem(String name) {
         var item = ITEMS_MAP.get(name);
-        if (item == null || item.getQuantity().compareTo(BigInteger.ZERO) <= 0) {
+        if (item == null || item.getQuantity().signum() <= 0) {
             return Optional.empty();
         }
         item.setQuantity(item.getQuantity().subtract(BigInteger.ONE));
@@ -108,5 +107,4 @@ public class VendingMachineDaoConsoleImpl implements VendingMachineDao {
         
         writer.close();
     }
-
 }

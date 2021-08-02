@@ -34,8 +34,11 @@ public class VendingMachineController {
         this.service = service;
     }
     
+    /**
+     * Executes a run of this application
+     */
     public void run() {
-        
+        // attempt to load Vending Machine Items
         try {
             service.loadItems();
         } catch (FailedLoadOfVendingItemsException ex) {
@@ -87,12 +90,14 @@ public class VendingMachineController {
             }
         }
         
+        // attempt to save items
         try {
             service.saveItems();
         } catch (FailedSaveOfVendingItemsException ex) {
             view.displayErrorLine("Warning: Unable to save vending items");
         }
         
+        // free all resources
         view.close();
         service.close();
     }

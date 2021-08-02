@@ -14,7 +14,6 @@ public class VendingMachineAuditDaoConsoleImpl implements VendingMachineAuditDao
 
     public static final String AUDIT_FILE = "audit.txt";
     private PrintWriter writer;
-    private boolean writerAvailable;
     
     public VendingMachineAuditDaoConsoleImpl() {
         try {

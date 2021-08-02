@@ -13,7 +13,6 @@ import com.bm.vendingmachine.ui.VendingMachineView;
  * @author Benjamin Munoz
  * email: driver396@gmail.com
  * date: Jul 31, 2021
- * purpose: (TODO)
  */
 public class App {
     public static void main(String[] args) {

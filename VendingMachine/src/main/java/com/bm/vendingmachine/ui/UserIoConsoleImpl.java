@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
- * ... 
+ * The console implementation of the User I/O component
  *
  * @author Benjamin Munoz
  * email: driver396@gmail.com

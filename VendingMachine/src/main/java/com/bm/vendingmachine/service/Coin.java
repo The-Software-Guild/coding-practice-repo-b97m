@@ -3,7 +3,7 @@ package com.bm.vendingmachine.service;
 import java.math.BigDecimal;
 
 /**
- * ...
+ * An enum for representing the values of various U.S. coins
  *
  * @author Benjamin Munoz
  * email: driver396@gmail.com
@@ -20,10 +20,16 @@ public enum Coin {
         this.value = value;
     }
 
+    /**
+     * @return The value of the coin in dollars
+     */
     public BigDecimal getValue() {
         return value;
     }
     
+    /**
+     * @return The qualified name of this coin
+     */
     public String repName() {
         return this.toString().charAt(0)
                 + this.toString().substring(1).toLowerCase();
