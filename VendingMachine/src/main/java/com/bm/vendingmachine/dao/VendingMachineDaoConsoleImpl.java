@@ -26,13 +26,20 @@ import java.util.Scanner;
  * date: Jul 31, 2021
  */
 public class VendingMachineDaoConsoleImpl implements VendingMachineDao {
-    private static final String ITEMS_FILE = "items.txt";
+    private final String ITEMS_FILE;
     private static final String DELIMITER = "::";
     private final Map<String, VendingMachineItem> ITEMS_MAP;
     
     public VendingMachineDaoConsoleImpl() {
         ITEMS_MAP = new HashMap<>();
+        ITEMS_FILE = "items.txt";
     }
+    
+    public VendingMachineDaoConsoleImpl(String itemsFile) {
+        ITEMS_MAP = new HashMap<>();
+        ITEMS_FILE = itemsFile;
+    }
+    
     
     @Override
     public void loadItems() throws FailedLoadOfVendingItemsException {
