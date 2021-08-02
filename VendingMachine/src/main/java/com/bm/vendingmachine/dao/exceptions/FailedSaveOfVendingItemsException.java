@@ -1,6 +1,8 @@
 package com.bm.vendingmachine.dao.exceptions;
 
 /**
+ * An exception for indicating the failed saving of Vending Items
+ * 
  * @author Benjamin Munoz
  */
 public class FailedSaveOfVendingItemsException extends Exception {

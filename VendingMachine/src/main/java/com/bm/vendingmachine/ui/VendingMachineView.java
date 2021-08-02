@@ -97,7 +97,7 @@ public class VendingMachineView {
         cents = cents.remainder(new BigInteger("5"));
         
         userIo.displayAroundContents(
-            "Change provided",
+            "Change returned",
             new String[] {
                 "Quarters: " + quarters.toString(),
                 "Dimes: " + dimes.toString(),

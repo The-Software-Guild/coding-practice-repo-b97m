@@ -1,8 +1,8 @@
 package com.bm.vendingmachine;
 
 import com.bm.vendingmachine.controller.VendingMachineController;
-import com.bm.vendingmachine.dao.VendingMachineAuditDaoConsoleImpl;
-import com.bm.vendingmachine.dao.VendingMachineDaoConsoleImpl;
+import com.bm.vendingmachine.dao.VendingMachineAuditDaoFileImpl;
+import com.bm.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.bm.vendingmachine.service.VendingMachineService;
 import com.bm.vendingmachine.ui.UserIoConsoleImpl;
 import com.bm.vendingmachine.ui.VendingMachineView;
@@ -21,8 +21,8 @@ public class App {
         );
     
         VendingMachineService service = new VendingMachineService(
-            new VendingMachineDaoConsoleImpl(),
-            new VendingMachineAuditDaoConsoleImpl()
+            new VendingMachineDaoFileImpl(),
+            new VendingMachineAuditDaoFileImpl()
         );
         
         VendingMachineController controller = new VendingMachineController(

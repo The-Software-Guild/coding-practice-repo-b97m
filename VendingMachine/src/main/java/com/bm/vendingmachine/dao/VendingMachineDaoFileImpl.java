@@ -19,23 +19,23 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * ... 
+ * The file implementation of the VendingMachineDao interface
  *
  * @author Benjamin Munoz
  * email: driver396@gmail.com
  * date: Jul 31, 2021
  */
-public class VendingMachineDaoConsoleImpl implements VendingMachineDao {
+public class VendingMachineDaoFileImpl implements VendingMachineDao {
     private final String ITEMS_FILE;
     private static final String DELIMITER = "::";
     private final Map<String, VendingMachineItem> ITEMS_MAP;
     
-    public VendingMachineDaoConsoleImpl() {
+    public VendingMachineDaoFileImpl() {
         ITEMS_MAP = new HashMap<>();
         ITEMS_FILE = "items.txt";
     }
     
-    public VendingMachineDaoConsoleImpl(String itemsFile) {
+    public VendingMachineDaoFileImpl(String itemsFile) {
         ITEMS_MAP = new HashMap<>();
         ITEMS_FILE = itemsFile;
     }

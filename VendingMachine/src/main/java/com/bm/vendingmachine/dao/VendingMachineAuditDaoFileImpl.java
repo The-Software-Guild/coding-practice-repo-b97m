@@ -6,16 +6,18 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 /**
+ * The file implementation of the AuditDao interface
+ * 
  * @author Benjamin Munoz
  * email: driver396@gmail.com
  * date: Jul 31, 2021
  */
-public class VendingMachineAuditDaoConsoleImpl implements VendingMachineAuditDao {
+public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao {
 
     public static final String AUDIT_FILE = "audit.txt";
     private PrintWriter writer;
     
-    public VendingMachineAuditDaoConsoleImpl() {
+    public VendingMachineAuditDaoFileImpl() {
         try {
             writer = new PrintWriter(new FileWriter(AUDIT_FILE, true));
         } catch (IOException ex) {

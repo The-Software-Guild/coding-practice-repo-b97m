@@ -34,7 +34,7 @@ public class VendingMachineDaoConsoleImplTest {
     public void testLoadAndGetAllOnEmpty() {
         fileSetup(ITEMS_EMPTY);
         
-        dao = new VendingMachineDaoConsoleImpl(ITEMS_EMPTY);
+        dao = new VendingMachineDaoFileImpl(ITEMS_EMPTY);
         try {
             dao.loadItems();
         } catch (FailedLoadOfVendingItemsException ex) {
@@ -54,7 +54,7 @@ public class VendingMachineDaoConsoleImplTest {
     public void testLoadAndGetAllOnSingle() {
         fileSetup(ITEMS_SINGLE, "Pepsi::4.99::10");
         
-        dao = new VendingMachineDaoConsoleImpl(ITEMS_SINGLE);
+        dao = new VendingMachineDaoFileImpl(ITEMS_SINGLE);
         try {
             dao.loadItems();
         } catch (FailedLoadOfVendingItemsException ex) {
@@ -64,17 +64,35 @@ public class VendingMachineDaoConsoleImplTest {
         List<VendingMachineItem> allItems = dao.getAllItems();
         assertNotNull(allItems, "This list should not be null");
         assertTrue(allItems.size() == 1, "There should be one item in the list");
+        assertTrue(
+            allItems.contains(
+                new VendingMachineItem(
+                    "Pepsi", 
+                    new BigDecimal("4.99"), 
+                    new BigInteger("10")
+                )
+            )
+        );
         
         allItems = dao.getAllItems();
         assertNotNull(allItems, "Again, this list should not be null");
         assertTrue(allItems.size() == 1, "This list should still have one item");
+        assertTrue(
+            allItems.contains(
+                new VendingMachineItem(
+                    "Pepsi", 
+                    new BigDecimal("4.99"), 
+                    new BigInteger("10")
+                )
+            )
+        );
     }
     
     @Test
     public void testLoadAndGetAllOnMultiple() {
         fileSetup(ITEMS_MULTI, "Pepsi::4.99::10", "Doritos::3.99::200");
         
-        dao = new VendingMachineDaoConsoleImpl(ITEMS_MULTI);
+        dao = new VendingMachineDaoFileImpl(ITEMS_MULTI);
         try {
             dao.loadItems();
         } catch (FailedLoadOfVendingItemsException ex) {
@@ -84,17 +102,53 @@ public class VendingMachineDaoConsoleImplTest {
         List<VendingMachineItem> allItems = dao.getAllItems();
         assertNotNull(allItems, "This list should not be null");
         assertTrue(allItems.size() == 2, "There should be two items in the list");
+        assertTrue(
+            allItems.contains(
+                new VendingMachineItem(
+                    "Pepsi", 
+                    new BigDecimal("4.99"), 
+                    new BigInteger("10")
+                )
+            )
+        );
+        assertTrue(
+            allItems.contains(
+                new VendingMachineItem(
+                    "Doritos", 
+                    new BigDecimal("3.99"), 
+                    new BigInteger("200")
+                )
+            )
+        );
         
         allItems = dao.getAllItems();
         assertNotNull(allItems, "Again, this list should not be null");
         assertTrue(allItems.size() == 2, "This list should still have two items");
+        assertTrue(
+            allItems.contains(
+                new VendingMachineItem(
+                    "Pepsi", 
+                    new BigDecimal("4.99"), 
+                    new BigInteger("10")
+                )
+            )
+        );
+        assertTrue(
+            allItems.contains(
+                new VendingMachineItem(
+                    "Doritos", 
+                    new BigDecimal("3.99"), 
+                    new BigInteger("200")
+                )
+            )
+        );
     }
     
     @Test
     public void testLoadAndSave() {
         fileSetup(ITEMS_LOAD_SAVE, "Pepsi::3.99::5", "Snickers::2.99::4");
         
-        dao = new VendingMachineDaoConsoleImpl(ITEMS_LOAD_SAVE);
+        dao = new VendingMachineDaoFileImpl(ITEMS_LOAD_SAVE);
         
         try {
             dao.loadItems();
@@ -105,6 +159,25 @@ public class VendingMachineDaoConsoleImplTest {
         List<VendingMachineItem> initialList = dao.getAllItems();
         assertNotNull(initialList, "This list should not be null");
         assertEquals(initialList.size(), 2, "There should be two elements in this list");
+        assertTrue(
+            initialList.contains(
+                new VendingMachineItem(
+                    "Pepsi", 
+                    new BigDecimal("3.99"), 
+                    new BigInteger("5")
+                )
+            )
+        );
+        assertTrue(
+            initialList.contains(
+                new VendingMachineItem(
+                    "Snickers", 
+                    new BigDecimal("2.99"), 
+                    new BigInteger("4")
+                )
+            )
+        );
+        
         try {
             dao.saveItems();
         } catch (FailedSaveOfVendingItemsException ex) {
@@ -128,7 +201,7 @@ public class VendingMachineDaoConsoleImplTest {
     public void testGetAndRemove() throws FailedLoadOfVendingItemsException {
         fileSetup(ITEMS_GET_REMOVE, "Pepsi::2.99::1");
         
-        dao = new VendingMachineDaoConsoleImpl(ITEMS_GET_REMOVE);
+        dao = new VendingMachineDaoFileImpl(ITEMS_GET_REMOVE);
         
         dao.loadItems();
         
@@ -179,7 +252,7 @@ public class VendingMachineDaoConsoleImplTest {
     public void testGetRemoveSave() throws FailedLoadOfVendingItemsException, FailedSaveOfVendingItemsException {
         fileSetup(ITEMS_GET_REMOVE_SAVE, "Pepsi::3.99::10");
         
-        dao = new VendingMachineDaoConsoleImpl(ITEMS_GET_REMOVE_SAVE);
+        dao = new VendingMachineDaoFileImpl(ITEMS_GET_REMOVE_SAVE);
         
         dao.loadItems();
         
@@ -230,6 +303,31 @@ public class VendingMachineDaoConsoleImplTest {
             ),
             () -> fail("This element should not be empty")
         );
+    }
+    
+    @Test
+    public void testGetAndGetAll() throws FailedLoadOfVendingItemsException {
+        fileSetup(ITEMS_MULTI, "Pepsi::4.99::10", "Doritos::3.99::200");
+        
+        dao = new VendingMachineDaoFileImpl(ITEMS_MULTI);
+        dao.loadItems();
+        
+        for (int i = 0; i < 10; i++) {        
+            List<VendingMachineItem> initialList = dao.getAllItems();
+            assertNotNull(initialList, "This element should not be null");
+            assertTrue(initialList.size() == 2, "This element should have two elements");
+        
+            // see if it is possible to obtain the two items
+            Optional<VendingMachineItem> presentPepsi = dao.getItemByName("Pepsi");
+            Optional<VendingMachineItem> presentDorito = dao.getItemByName("Doritos");
+            
+            assertTrue(presentPepsi.isPresent());
+            assertTrue(presentDorito.isPresent());
+            
+            // ... and see that they're contained in the list
+            assertTrue(initialList.contains(presentPepsi.get()));
+            assertTrue(initialList.contains(presentDorito.get()));
+        }
     }
     
     private void fileSetup(String filename, String... contents) {

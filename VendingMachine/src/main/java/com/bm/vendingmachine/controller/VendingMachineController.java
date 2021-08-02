@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.bm.vendingmachine.controller;
 
 import com.bm.vendingmachine.dao.exceptions.FailedLoadOfVendingItemsException;
@@ -181,8 +175,9 @@ public class VendingMachineController {
             "").get();
             
             try {
-                service.transactItem(itemName);
-                view.displayChange(service.getFundsAvailable());
+                BigDecimal change = service.transactItem(itemName);
+                view.displayInformationalLine("Transaction Successful");
+                view.displayChange(change);
             } catch (NoItemInventoryException | InsufficientFundsException ex) {
                 view.displayErrorLine(ex.getMessage());
             }            
