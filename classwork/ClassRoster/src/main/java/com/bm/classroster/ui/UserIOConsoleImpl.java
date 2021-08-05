@@ -19,6 +19,10 @@ import java.util.Scanner;
 
 public class UserIOConsoleImpl implements UserIO {
     private Scanner reader;
+
+    public UserIOConsoleImpl() {
+        this(new Scanner(System.in));
+    }
     
     public UserIOConsoleImpl(Scanner reader) {
         this.reader = reader;
