@@ -2,15 +2,19 @@ package com.sg.booktracker.ui;
 
 import com.sg.booktracker.dto.Book;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Kyle David Rudy
  */
+@Component
 public class BookView {
     
     private UserIO io;
 
+    @Autowired
     public BookView(UserIO io) {
         this.io = io;
     }
