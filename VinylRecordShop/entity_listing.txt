@@ -1,0 +1,15 @@
+- Album
+   - Album Label
+   - Album Price
+   - Album Release Date
+   - Performing Band
+- Song
+   - Song title
+   - Performing Band
+   - Song video URL
+   - Album origin
+- Band
+   - Band name
+- Artist
+   - Artist name
+   - Band membership
