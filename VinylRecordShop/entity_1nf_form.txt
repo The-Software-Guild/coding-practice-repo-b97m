@@ -1,0 +1,25 @@
+- Album
+   - (PK) albumId
+   - title
+   - label
+   - price
+   - releaseDate
+   - (FK) bandId
+- SongAlbum
+   - (PK, FK) songId
+   - (PK, FK) albumId
+- Song
+   - (PK) songId 
+   - title 
+   - videoURL
+   - (FK) bandId
+- Band
+   - (PK) bandId
+   - name 
+- BandArtist
+   - (PK, FK) bandId
+   - (PK, FK) artistId
+- Artist
+   - (PK) artistId
+   - firstName
+   - lastName
