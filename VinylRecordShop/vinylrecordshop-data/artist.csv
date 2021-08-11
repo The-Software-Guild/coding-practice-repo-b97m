@@ -1,0 +1,24 @@
+artistId,artist.lname,artist.fname,hallOfFame
+1,Lennon,John,TRUE
+2,McCartney,Paul,TRUE
+3,Harrison,George,TRUE
+4,Starr,Ringo,TRUE
+5,Zager,Denny,FALSE
+6,Evans,Rick,FALSE
+10,Morrison,Van,TRUE
+11,Collins,Judy,FALSE
+12,Simon,Paul,TRUE
+13,Garfunkel,Art,FALSE
+14,Wilson,Brian,FALSE
+15,Wilson,Dennis,FALSE
+16,Wilson,Carl,FALSE
+17,Fataar,Ricky,FALSE
+18,Chaplin,Blondie,FALSE
+19,Page,Jimmy,FALSE
+20,Plant,Robert,FALSE
+21,Jones,John Paul,FALSE
+22,Bonham,John,FALSE
+23,Love,Mike ,FALSE
+24,Jardine,Al ,FALSE
+25,Marks,David,FALSE
+26,Johnston,Bruce ,FALSE
